@@ -1,0 +1,10 @@
+Order number: 1
+Movie: GeniusMovieTitle
+On: zaterdag 04-02-2023
+Movie starts at: 11:53
+
+You are seated at row 1, seat 1
+You are seated at row 1, seat 1
+You are seated at row 1, seat 1
+
+Total price: 22,5
