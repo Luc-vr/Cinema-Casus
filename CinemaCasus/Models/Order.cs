@@ -24,7 +24,7 @@ namespace SOA3_BioscoopCasus.Models
 
         public double CalculatePrice()
         {
-            if(Tickets == null || Tickets.Count == 0)
+            if(Tickets.Count == 0)
             {
                 return 0;
             }
