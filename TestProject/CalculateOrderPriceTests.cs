@@ -1,3 +1,6 @@
+using CinemaCasus.Behaviors;
+using CinemaCasus.Behaviors.PriceCalculation;
+using CinemaCasus.Models;
 using SOA3_BioscoopCasus.Models;
 
 namespace TestProject;
@@ -27,8 +30,10 @@ public class Tests
         this.weekendNonPremiumTicket = new (weekendScreening, false, 1, 1);
         this.nonWeekendNonPremiumTicket = new (nonWeekendScreening, false, 1, 1);
         
-        this.studentOrder = new (1, true);
-        this.nonStudentOrder = new (1, false);
+        this.studentOrder = new (1);
+        this.studentOrder.SetPriceCalculationBehaviour(new StudentPriceCalculation());
+        this.nonStudentOrder = new (1);
+        this.nonStudentOrder.SetPriceCalculationBehaviour(new NormalPriceCalculation());
     }
     
     [Test]
