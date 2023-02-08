@@ -1,10 +1,1 @@
-Order number: 1
-Movie: GeniusMovieTitle
-On: Friday 10-02-2023
-Movie starts at: 14:53
-
-You are seated at row 1, seat 1
-You are seated at row 1, seat 1
-You are seated at row 1, seat 1
-
-Total price: 15
+{"OrderNr":1,"Tickets":[{"IsPremium":false,"MovieScreening":{"DateAndTime":"2023-02-10T21:14:25.5900889+01:00","PricePerSeat":6.5,"Movie":{"MovieScreenings":[],"Title":"GeniusMovieTitle"}}},{"IsPremium":false,"MovieScreening":{"DateAndTime":"2023-02-10T21:14:25.5900889+01:00","PricePerSeat":6.5,"Movie":{"MovieScreenings":[],"Title":"GeniusMovieTitle"}}},{"IsPremium":true,"MovieScreening":{"DateAndTime":"2023-02-10T21:14:25.5900889+01:00","PricePerSeat":6.5,"Movie":{"MovieScreenings":[],"Title":"GeniusMovieTitle"}}}]}
