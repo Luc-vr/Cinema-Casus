@@ -1,20 +1,28 @@
 ﻿using System.Text;
 using System.Text.Json;
+using CinemaCasus.Behaviors;
+using CinemaCasus.Interfaces;
 
 namespace SOA3_BioscoopCasus.Models
 {
     public class Order
     {
         private int OrderNr { get; }
-        private bool IsStudentOrder { get; }
 
         private List<MovieTicket> Tickets { get;}
+        
+        private IPriceCalculationBehaviour PriceCalculationBehaviour { get; set; }
 
-        public Order(int orderNr, bool isStudentOrder)
+        public Order(int orderNr)
         {
             Tickets = new List<MovieTicket>();
             OrderNr = orderNr;
-            this.IsStudentOrder = isStudentOrder;
+            this.PriceCalculationBehaviour = new NormalPriceCalculation();
+        }
+        
+        public void SetPriceCalculationBehaviour(IPriceCalculationBehaviour priceCalculationBehaviour)
+        {
+            this.PriceCalculationBehaviour = priceCalculationBehaviour;
         }
 
         public void AddSeatReservation(MovieTicket ticket)
@@ -28,27 +36,9 @@ namespace SOA3_BioscoopCasus.Models
             {
                 return 0;
             }
-            double orderPrice = 0;
-            double premiumPrice = 3;
-            if (IsStudentOrder)
-            {
-                premiumPrice = 2;
-            }
-            bool isWeekDay = Tickets[0].IsScreeningWeekday();
-
-            // If it is a weekday or a student order, the second ticket is free
-            bool secondTicketFree = (IsStudentOrder || isWeekDay);
-
-            for (int i = 0; i < Tickets.Count; i++)
-            {
-                if (secondTicketFree && i % 2 != 0) continue;
-                double ticketPrice = Tickets[i].GetPrice();
-                if (Tickets[i].IsPremium)
-                {
-                    ticketPrice += premiumPrice;
-                }
-                orderPrice += ticketPrice;
-            }
+            
+            double orderPrice = PriceCalculationBehaviour.CalculatePrice(Tickets);
+            
             return CalculateGroupDiscount(6, orderPrice, 0.9);
         }
 
