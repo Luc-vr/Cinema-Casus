@@ -1,4 +1,4 @@
-﻿namespace SOA3_BioscoopCasus.Models
+﻿namespace CinemaCasus.Models
 {
     public enum TicketExportFormat
     {

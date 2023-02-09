@@ -1,7 +1,7 @@
 ﻿using CinemaCasus.Interfaces;
-using SOA3_BioscoopCasus.Models;
+using CinemaCasus.Models;
 
-namespace CinemaCasus.Behaviors;
+namespace CinemaCasus.Behaviors.PriceCalculation;
 
 public class NormalPriceCalculation : IPriceCalculationBehaviour
 {
@@ -23,7 +23,7 @@ public class NormalPriceCalculation : IPriceCalculationBehaviour
 
             orderPrice += ticketPrice;
         }
-        
+
         return orderPrice;
     }
 }

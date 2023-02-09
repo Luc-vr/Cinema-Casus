@@ -1,7 +1,6 @@
 ﻿using CinemaCasus.Behaviors.Export;
 using CinemaCasus.Behaviors.PriceCalculation;
 using CinemaCasus.Models;
-using SOA3_BioscoopCasus.Models;
 
 Movie movie = new Movie(title: "GeniusMovieTitle");
 MovieScreening screening = new MovieScreening(movie, DateTime.Now.AddDays(2), 6.5);

@@ -1,8 +1,6 @@
-﻿using System.Text.Json;
-using CinemaCasus.Interfaces;
+﻿using CinemaCasus.Interfaces;
 using CinemaCasus.Models;
 using Newtonsoft.Json;
-using SOA3_BioscoopCasus.Models;
 
 namespace CinemaCasus.Behaviors.Export;
 

@@ -1,4 +1,4 @@
-﻿﻿namespace SOA3_BioscoopCasus.Models
+﻿namespace CinemaCasus.Models
 {
     public class MovieScreening
     {
@@ -8,19 +8,19 @@
 
         public MovieScreening(Movie movie, DateTime dateAndTime, double pricePerSeat)
         {
-            this.Movie = movie;
-            this.DateAndTime = dateAndTime;
-            this.PricePerSeat = pricePerSeat;
+            Movie = movie;
+            DateAndTime = dateAndTime;
+            PricePerSeat = pricePerSeat;
         }
 
         public int GetDayNumber()
         {
             return (int)DateAndTime.DayOfWeek;
         }
-        
+
         public override string ToString()
         {
-            return Movie.ToString()+PricePerSeat;
+            return Movie.ToString() + PricePerSeat;
         }
     }
 }

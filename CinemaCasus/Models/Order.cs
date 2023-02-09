@@ -1,9 +1,8 @@
-﻿using System.Text;
-using CinemaCasus.Behaviors;
-using CinemaCasus.Behaviors.Export;
+﻿using CinemaCasus.Behaviors.Export;
+using CinemaCasus.Behaviors.PriceCalculation;
 using CinemaCasus.Interfaces;
 using Newtonsoft.Json;
-using SOA3_BioscoopCasus.Models;
+using System.Text;
 
 namespace CinemaCasus.Models
 {

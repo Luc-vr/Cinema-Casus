@@ -1,4 +1,4 @@
-﻿using SOA3_BioscoopCasus.Models;
+﻿using CinemaCasus.Models;
 
 namespace CinemaCasus.Interfaces;
 

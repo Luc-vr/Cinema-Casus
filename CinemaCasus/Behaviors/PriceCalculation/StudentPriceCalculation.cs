@@ -1,5 +1,5 @@
 ﻿using CinemaCasus.Interfaces;
-using SOA3_BioscoopCasus.Models;
+using CinemaCasus.Models;
 
 namespace CinemaCasus.Behaviors.PriceCalculation;
 

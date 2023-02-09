@@ -1,7 +1,6 @@
 using CinemaCasus.Behaviors;
 using CinemaCasus.Behaviors.PriceCalculation;
 using CinemaCasus.Models;
-using SOA3_BioscoopCasus.Models;
 
 namespace TestProject;
 

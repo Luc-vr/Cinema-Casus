@@ -1,4 +1,4 @@
-﻿namespace SOA3_BioscoopCasus.Models
+﻿namespace CinemaCasus.Models
 {
     public class MovieTicket
     {
@@ -10,16 +10,16 @@
 
         public MovieTicket(MovieScreening movieScreening, bool isPremiumReservation, int seatRow, int seatNr)
         {
-            this.MovieScreening = movieScreening;
-            this.IsPremium = isPremiumReservation;
-            this.SeatNr = seatNr;
-            this.RowNr = seatRow;
+            MovieScreening = movieScreening;
+            IsPremium = isPremiumReservation;
+            SeatNr = seatNr;
+            RowNr = seatRow;
         }
 
         public bool IsScreeningWeekday()
         {
             //checks if day comes before friday
-            return (MovieScreening.GetDayNumber() < 4);
+            return MovieScreening.GetDayNumber() < 4;
         }
 
         public double GetPrice()
@@ -29,9 +29,9 @@
 
         public override string ToString()
         {
-            return "You are seated at row "+RowNr+", seat "+SeatNr;
+            return "You are seated at row " + RowNr + ", seat " + SeatNr;
         }
-        
+
         public string GetMovieTitle()
         {
             return MovieScreening.Movie.Title;
