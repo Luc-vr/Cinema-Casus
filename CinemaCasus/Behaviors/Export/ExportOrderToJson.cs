@@ -6,7 +6,6 @@ namespace CinemaCasus.Behaviors.Export;
 
 public class ExportOrderToJson : IExportBehaviour
 {
-
     public string Export(object exportObject)
     {
         // Cast the object to an Order object

@@ -1,12 +1,13 @@
 ﻿using CinemaCasus.Behaviors.Export;
 using CinemaCasus.Behaviors.PriceCalculation;
+using CinemaCasus.Behaviors.State;
 using CinemaCasus.Interfaces;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace CinemaCasus.Models
 {
-    public class Order
+    public class Order : IOrder
     {
         [JsonProperty]
         private int OrderNr { get; }
@@ -14,6 +15,7 @@ namespace CinemaCasus.Models
         [JsonProperty]
         private List<MovieTicket> Tickets { get; }
 
+        private IState State { get; set; }
         private IPriceCalculationBehaviour PriceCalculationBehaviour { get; set; }
 
         private IExportBehaviour ExportBehaviour { get; set; }
@@ -24,21 +26,22 @@ namespace CinemaCasus.Models
             OrderNr = orderNr;
             this.PriceCalculationBehaviour = new NormalPriceCalculation();
             this.ExportBehaviour = new ExportOrderToPlainText();
+            this.State = new CreatedState();
         }
 
         public void SetPriceCalculationBehaviour(IPriceCalculationBehaviour priceCalculationBehaviour)
         {
-            this.PriceCalculationBehaviour = priceCalculationBehaviour;
+            this.PriceCalculationBehaviour = State.SetPriceCalculationBehaviour(priceCalculationBehaviour);
         }
 
         public void SetExportBehaviour(IExportBehaviour exportBehaviour)
         {
-            this.ExportBehaviour = exportBehaviour;
+            this.ExportBehaviour = this.State.SetExportBehaviour(exportBehaviour, this.ExportBehaviour);
         }
 
         public void AddSeatReservation(MovieTicket ticket)
         {
-            this.Tickets.Add(ticket);
+            this.Tickets.Add(this.State.AddSeatReservation(ticket));
         }
 
         public double CalculatePrice()
@@ -47,9 +50,7 @@ namespace CinemaCasus.Models
             {
                 return 0;
             }
-
             double orderPrice = PriceCalculationBehaviour.CalculatePrice(Tickets);
-
             return CalculateGroupDiscount(6, orderPrice, 0.9);
         }
 
@@ -59,7 +60,6 @@ namespace CinemaCasus.Models
             {
                 price *= discountPercentage;
             }
-
             return price;
         }
 
@@ -92,6 +92,21 @@ namespace CinemaCasus.Models
         {
             const string filePath = "../../../Files/Order.txt";
             File.WriteAllText(filePath, this.ExportBehaviour.Export(this));
+        }
+
+        public void Submit()
+        {
+            this.State = this.State.Submit();
+        }
+
+        public void Cancel()
+        {
+            this.State = this.State.Cancel();   
+        }
+
+        public void Pay()
+        {
+            this.State = this.State.Pay();
         }
     }
 }
