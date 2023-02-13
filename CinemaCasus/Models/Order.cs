@@ -31,17 +31,40 @@ namespace CinemaCasus.Models
 
         public void SetPriceCalculationBehaviour(IPriceCalculationBehaviour priceCalculationBehaviour)
         {
-            this.PriceCalculationBehaviour = State.SetPriceCalculationBehaviour(priceCalculationBehaviour);
+            try
+            {
+                this.PriceCalculationBehaviour = State.SetPriceCalculationBehaviour(priceCalculationBehaviour);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void SetExportBehaviour(IExportBehaviour exportBehaviour)
         {
-            this.ExportBehaviour = this.State.SetExportBehaviour(exportBehaviour, this.ExportBehaviour);
+            try
+            {
+                this.ExportBehaviour = this.State.SetExportBehaviour(exportBehaviour, this.ExportBehaviour);
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void AddSeatReservation(MovieTicket ticket)
         {
-            this.Tickets.Add(this.State.AddSeatReservation(ticket));
+            try
+            {
+                this.Tickets.Add(this.State.AddSeatReservation(ticket));
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
         }
 
         public double CalculatePrice()
@@ -96,17 +119,38 @@ namespace CinemaCasus.Models
 
         public void Submit()
         {
-            this.State = this.State.Submit();
+            try
+            {
+                this.State = this.State.Submit();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void Cancel()
         {
-            this.State = this.State.Cancel();   
+            try
+            {
+                this.State = this.State.Cancel();   
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void Pay()
         {
-            this.State = this.State.Pay();
+            try
+            {
+                this.State = this.State.Pay();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
