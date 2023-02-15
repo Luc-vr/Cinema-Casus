@@ -10,7 +10,10 @@ namespace CinemaCasus.Models
     public class Order : IOrder
     {
         [JsonProperty]
-        private int OrderNr { get; }
+        public int OrderNr { get; }
+        
+        [JsonProperty]
+        private Customer Customer { get; set; }
 
         [JsonProperty]
         private List<MovieTicket> Tickets { get; }
@@ -19,11 +22,15 @@ namespace CinemaCasus.Models
         private IPriceCalculationBehaviour PriceCalculationBehaviour { get; set; }
 
         private IExportBehaviour ExportBehaviour { get; set; }
+        
+        private List<IOrderSubscriber> Subscribers { get; set; }
 
-        public Order(int orderNr)
+        public Order(int orderNr, Customer customer)
         {
             Tickets = new List<MovieTicket>();
+            Subscribers = new List<IOrderSubscriber>();
             OrderNr = orderNr;
+            Customer = customer;
             this.PriceCalculationBehaviour = new NormalPriceCalculation();
             this.ExportBehaviour = new ExportOrderToPlainText();
             this.State = new CreatedState();
@@ -122,6 +129,7 @@ namespace CinemaCasus.Models
             try
             {
                 this.State = this.State.Submit();
+                NotifySubscribers();
             }
             catch (Exception e)
             {
@@ -133,7 +141,8 @@ namespace CinemaCasus.Models
         {
             try
             {
-                this.State = this.State.Cancel();   
+                this.State = this.State.Cancel();
+                NotifySubscribers();
             }
             catch (Exception e)
             {
@@ -146,10 +155,29 @@ namespace CinemaCasus.Models
             try
             {
                 this.State = this.State.Pay();
+                NotifySubscribers();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+            }
+        }
+        
+        public void Subscribe(IOrderSubscriber subscriber)
+        {
+            Subscribers.Add(subscriber);
+        }
+        
+        public void Unsubscribe(IOrderSubscriber subscriber)
+        {
+            Subscribers.Remove(subscriber);
+        }
+        
+        public void NotifySubscribers()
+        {
+            foreach (IOrderSubscriber subscriber in Subscribers)
+            {
+                subscriber.Update(this);
             }
         }
     }
