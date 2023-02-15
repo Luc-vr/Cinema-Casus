@@ -12,7 +12,9 @@ MovieTicket ticket = new MovieTicket(screening, isNotPremium, 1, 1);
 MovieTicket ticket2 = new MovieTicket(screening, isNotPremium, 1, 1);
 MovieTicket ticket3 = new MovieTicket(screening, isPremium, 1, 1);
 
-Order order = new Order(1);
+Customer customer = new ("Test customer", "test@mail.com", "0612345678");
+
+Order order = new (1, customer);
 
 order.SetPriceCalculationBehaviour(new StudentPriceCalculation());
 order.SetExportBehaviour(new ExportOrderToJson());

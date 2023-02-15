@@ -15,6 +15,7 @@ public class Tests
     private MovieTicket nonWeekendNonPremiumTicket;
     private Order studentOrder;
     private Order nonStudentOrder;
+    private Customer customer;
     
     
     [SetUp]
@@ -29,9 +30,11 @@ public class Tests
         this.weekendNonPremiumTicket = new (weekendScreening, false, 1, 1);
         this.nonWeekendNonPremiumTicket = new (nonWeekendScreening, false, 1, 1);
         
-        this.studentOrder = new (1);
+        this.customer = new ("Test customer", "test@mail.com", "0612345678");
+        
+        this.studentOrder = new (1, this.customer);
         this.studentOrder.SetPriceCalculationBehaviour(new StudentPriceCalculation());
-        this.nonStudentOrder = new (1);
+        this.nonStudentOrder = new (1, this.customer);
         this.nonStudentOrder.SetPriceCalculationBehaviour(new NormalPriceCalculation());
     }
     
